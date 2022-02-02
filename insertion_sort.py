@@ -1,8 +1,11 @@
 # Insertion sort O(n^2)
-from array_stuff import array_int_input
+from array_stuff import array_int_input, array_print
 
 def insertion_sort():
     arr = array_int_input()
+
+    print('Input: ', end='')
+    array_print(arr)
 
     for j in range(1, len(arr)): # originally started range at 2, since the textbook starts indexing from 1 not 0
         key = arr[j]
@@ -11,12 +14,7 @@ def insertion_sort():
             arr[i + 1] = arr[i]
             i -= 1
 
-    for i in range(len(arr)):
-        print(f'{arr[i]}', end='')
-        if i < len(arr) - 1:
-            print(', ', end='')
-        else:
-            print()
+    array_print(arr)
             
 
 if __name__=='__main__':

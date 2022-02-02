@@ -25,3 +25,13 @@ def array_int_input():
     # arr = [None] * n
     # for e in range(n):
         # arr[e] = int_in()
+
+def array_print(arr):
+    for i in range(len(arr)):
+        print(f'{arr[i]}', end='')
+        if i < len(arr) - 1:
+            print(', ', end='')
+        else:
+            print()
+    # Sample output:
+    # 1, 4, 7, 29, 31

@@ -1,4 +1,6 @@
 # Array util functions
+import random
+
 def array_int_input():
     """Take a user-defined number of numeric inputs, return an array of ints."""
     def int_in(msg=""):
@@ -26,6 +28,7 @@ def array_int_input():
     # for e in range(n):
         # arr[e] = int_in()
 
+
 def array_print(arr):
     for i in range(len(arr)):
         print(f'{arr[i]}', end='')
@@ -35,3 +38,12 @@ def array_print(arr):
             print()
     # Sample output:
     # 1, 4, 7, 29, 31
+
+
+def array_random():
+    """Generate a random array of ints."""
+    arr = []
+    length = random.randint(5, 10)
+    for i in range(length):
+        arr.append(random.randint(-50, 50))
+    return arr

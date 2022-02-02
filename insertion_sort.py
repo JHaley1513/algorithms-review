@@ -1,8 +1,11 @@
 # Insertion sort O(n^2)
-from array_stuff import array_int_input, array_print
+from array_stuff import array_int_input, array_print, array_random
 
-def insertion_sort():
-    arr = array_int_input()
+def insertion_sort(random=True):
+    if random:
+        arr = array_random()
+    else:
+        arr = array_int_input()
 
     print('Input: ', end='')
     array_print(arr)
@@ -14,6 +17,7 @@ def insertion_sort():
             arr[i + 1] = arr[i]
             i -= 1
 
+    print('Output: ', end='')
     array_print(arr)
             
 

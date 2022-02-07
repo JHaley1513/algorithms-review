@@ -47,3 +47,13 @@ def array_random():
     for i in range(length):
         arr.append(random.randint(-50, 50))
     return arr
+
+
+def array_str(arr):
+    for i in range(len(arr)):
+        arr[i] = str(arr[i])
+    return ', '.join(arr)
+    # This way doesn't work for some reason
+    # for i in arr:
+    #     i = str(i)
+    #     print(type(i))

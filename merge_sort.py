@@ -1,7 +1,7 @@
 # Merge sort 
 # Merge sort 1: pass full list each time, changing the left & right limits of what you operate on. (in-place sorting)
 # Merge sort 2: pass partial list each time (not in-place)
-from array_stuff import array_random, array_print
+from array_stuff import array_random, array_print, array_str
 
 def merge1(arr, l, m, r):
     # left position <= mid < right.
@@ -46,17 +46,17 @@ def merge2(arr, sub_arr1, sub_arr2):
     """Merge two sorted subarrays into one combined sorted array."""
     i = j = 0 # index in sub_arr1 and sub_arr2
     while i + j < len(arr):
-        # This way you'll usually end up with `list index out of range`
-        if sub_arr1[i] < sub_arr2[j]:
+        if j == len(sub_arr2) or (i < len(sub_arr1) and sub_arr1[i] < sub_arr2[j]):
             arr[i + j] = sub_arr1[i]
             i += 1
         else:
             arr[i + j] = sub_arr2[j]
             j += 1
-        array_print(arr)
+    array_print(arr)
 
 
 def merge_sort2(arr):
+    print(f'merge_sort2({array_str(arr)})')
     n = len(arr)
     if n < 2:
         return
@@ -70,25 +70,36 @@ def merge_sort2(arr):
     l1 = len(arr1)
     l2 = len(arr2)
     # Best case A: largest in arr1 is smaller than smallest in arr2, so all of arr1 items < all of arr2 items
-    if arr1[-1] < arr2[0]:
+    if arr1[-1] <= arr2[0]:
+        print('all arr1 <= all arr2. ', end='')
         for i in range(l1):
             arr[i] = arr1[i]
         for i in range(l2):
             arr[l1 + i] = arr2[i]
+        array_print(arr)
     # Best case B: all of arr1 items > all of arr2 items
-    elif arr1[0] > arr2[-1]:
+    elif arr1[0] >= arr2[-1]:
+        print('all arr1 >= all arr2. ', end='')
         for i in range(l2):
             arr[i] = arr2[i]
         for i in range(l1):
             arr[l2 + i] = arr1[i]
+        array_print(arr)
     # Normal case
     else:
         merge2(arr, arr1, arr2)
 
+
 if __name__=='__main__':
+    merge_type = 2
+
     a = array_random()
-    array_print(a)
-    try:
-        merge_sort2(a)
-    finally:
+    if merge_type == 1:
         array_print(a)
+        merge_sort1(a, 0, len(a))
+    elif merge_type == 2:
+        merge_sort2(a)
+    else:
+        print("Unknown merge type")
+
+    array_print(a)

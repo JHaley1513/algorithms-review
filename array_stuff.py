@@ -57,3 +57,14 @@ def array_str(arr):
     # for i in arr:
     #     i = str(i)
     #     print(type(i))
+
+
+def array_check_type(arr, t):
+    if type(t) == list:
+        for i in range(len(arr)):
+            if type(arr[i]) not in t:
+                print(f'arr[{i}] = {arr[i]}. type is {type(arr[i])}, which is not in {array_str(t)}.')
+    else:
+        for i in range(len(arr)):
+            if arr[i] != t:
+                print(f'arr[{i}] = {arr[i]}. type is {type(arr[i])}, which is not in {array_str(t)}.')

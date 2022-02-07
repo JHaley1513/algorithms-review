@@ -45,13 +45,18 @@ def merge_sort1(arr, l, r):
 def merge2(arr, sub_arr1, sub_arr2):
     """Merge two sorted subarrays into one combined sorted array."""
     i = j = 0 # index in sub_arr1 and sub_arr2
+    print("Combined array: ", end='')
     while i + j < len(arr):
+        # if i + j > 0: # print a leading comma except on the first iteration
+            # print(', ', end='')
         if j == len(sub_arr2) or (i < len(sub_arr1) and sub_arr1[i] < sub_arr2[j]):
             arr[i + j] = sub_arr1[i]
             i += 1
         else:
             arr[i + j] = sub_arr2[j]
             j += 1
+    #     print(f'{arr[i + j - 1]}', end='')
+    # print()
     array_print(arr)
 
 
@@ -70,24 +75,24 @@ def merge_sort2(arr):
     l1 = len(arr1)
     l2 = len(arr2)
     # Best case A: largest in arr1 is smaller than smallest in arr2, so all of arr1 items < all of arr2 items
-    if arr1[-1] <= arr2[0]:
-        print('all arr1 <= all arr2. ', end='')
-        for i in range(l1):
-            arr[i] = arr1[i]
-        for i in range(l2):
-            arr[l1 + i] = arr2[i]
-        array_print(arr)
-    # Best case B: all of arr1 items > all of arr2 items
-    elif arr1[0] >= arr2[-1]:
-        print('all arr1 >= all arr2. ', end='')
-        for i in range(l2):
-            arr[i] = arr2[i]
-        for i in range(l1):
-            arr[l2 + i] = arr1[i]
-        array_print(arr)
-    # Normal case
-    else:
-        merge2(arr, arr1, arr2)
+    # if arr1[-1] <= arr2[0]:
+    #     print('all arr1 <= all arr2. ', end='')
+    #     for i in range(l1):
+    #         arr[i] = arr1[i]
+    #     for i in range(l2):
+    #         arr[l1 + i] = arr2[i]
+    #     array_print(arr)
+    # # Best case B: all of arr1 items > all of arr2 items
+    # elif arr1[0] >= arr2[-1]:
+    #     print('all arr1 >= all arr2. ', end='')
+    #     for i in range(l2):
+    #         arr[i] = arr2[i]
+    #     for i in range(l1):
+    #         arr[l2 + i] = arr1[i]
+    #     array_print(arr)
+    # # Normal case
+    # else:
+    merge2(arr, arr1, arr2)
 
 
 if __name__=='__main__':

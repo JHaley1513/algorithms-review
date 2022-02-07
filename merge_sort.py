@@ -44,19 +44,31 @@ def merge_sort1(arr, l, r):
 
 def merge2(arr, sub_arr1, sub_arr2):
     """Merge two sorted subarrays into one combined sorted array."""
+    for a in range(len(sub_arr1)):
+        if type(sub_arr1[a]) != int:
+            print(type(sub_arr1[a]))
+    for b in range(len(sub_arr2)):
+        if type(sub_arr2[b]) != int:
+            print(type(sub_arr2[a]))
     i = j = 0 # index in sub_arr1 and sub_arr2
-    print("Combined array: ", end='')
+    print(f'merge2([{array_str(sub_arr1)}], [{array_str(sub_arr2)}])')
     while i + j < len(arr):
         # if i + j > 0: # print a leading comma except on the first iteration
             # print(', ', end='')
         if j == len(sub_arr2) or (i < len(sub_arr1) and sub_arr1[i] < sub_arr2[j]):
+            if j == len(sub_arr2):
+                print(f'{j} == {len(sub_arr2)}')
+            else:
+                print(f'{i} < {len(sub_arr1)} and {sub_arr1[i]} < {sub_arr2[j]}')
             arr[i + j] = sub_arr1[i]
             i += 1
         else:
+            print("else")
             arr[i + j] = sub_arr2[j]
             j += 1
     #     print(f'{arr[i + j - 1]}', end='')
     # print()
+    print("Combined array: ", end='')
     array_print(arr)
 
 

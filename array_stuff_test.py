@@ -48,11 +48,16 @@ def t_array_print():
     for i in range(len(a)):
         print(e[i])
         array_print(a[i])
+    print()
     
 
-
 def t_array_random():
-    pass
+    print('Testing array_random...')
+    array_print(array_random(int, 10))
+    array_print(array_random(float, 8))
+    array_print(array_random(str, 5))
+    print()
+
 
 def t_array_check_type():
     a = [
@@ -91,7 +96,7 @@ def t_array_check_type():
 
 if __name__=='__main__':
     # t_array_str()
-    t_array_print()
-    # t_array_random()
+    # t_array_print()
+    t_array_random()
     # t_array_check_type()
     # array_int_input() # take user input

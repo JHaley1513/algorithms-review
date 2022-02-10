@@ -23,18 +23,18 @@ def array_print(arr, break_after=True):
     # 1, 4, 7, 29, 31
 
 
-def array_random(t='int', l=0):
+def array_random(t=int, l=0):
     """Generate a random array of the selected type."""
     arr = []
     if l < 1 or l > 20:
         l = random.randint(5, 10)
     for i in range(l):
-        if t == 'int':
+        if t == int:
             arr.append(random.randint(-50, 50))
-        elif t == 'float':
+        elif t == float:
             arr.append(round(random.uniform(-50.00, 50.00), 2))
-        elif t == 'str':
-            arr.append(''.join(random.choices(string.ascii_uppercase + string.digits, k=N)))
+        elif t == str:
+            arr.append(''.join(random.choices(string.ascii_uppercase + string.digits, k=10)))
         else:
             print(f'Unknown type for array_random: {t}')
             return []

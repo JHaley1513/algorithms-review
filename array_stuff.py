@@ -16,19 +16,18 @@ def array_print(arr, break_after=True):
         print(f'{arr[i]}', end='')
         if i < len(arr) - 1:
             print(', ', end='')
-        else:
-            if break_after:
-                print()
+    if break_after:
+        print()
     # Sample output:
     # 1, 4, 7, 29, 31
 
 
-def array_random(t=int, l=0):
+def array_random(t=int, n=0):
     """Generate a random array of the selected type."""
     arr = []
-    if l < 1 or l > 20:
-        l = random.randint(5, 10)
-    for i in range(l):
+    if n < 1 or n > 20:
+        n = random.randint(5, 10)
+    for i in range(n):
         if t == int:
             arr.append(random.randint(-50, 50))
         elif t == float:
@@ -62,15 +61,25 @@ def array_int_input():
         x = -1
         while True: # keep trying until receiving a valid input
             try:
-                # Allows us to take a float string (i.e. '3.7') and convert it to an int (i.e. 3)
+                # Take an int or float and convert it to an int (i.e. 3.7 becomes 3)
                 x = int(float(input(msg)))
             except ValueError:
                 print("Not a number, try again.")
-            else: # NOT `finally`
+            else: # once a valid input has been received, break and return
                 break
         return x
 
-    n = int_in("Number of integers to enter: ")
+    redo = True
+    while redo:
+        # If the user accidentally asks for too many inputs, they get a chance to redo it.
+        n = int_in("Number of integers to enter: ")
+        if n > 10:
+            answer = input("Are you sure? [y]/n: ").strip().lower()
+            if answer != 'n' and answer != 'no':
+                redo = False
+        else:
+            redo = False
+        
     arr = []
     for e in range(n):
         arr.append(int_in())

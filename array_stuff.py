@@ -71,14 +71,7 @@ def array_int_input():
         return x
 
     n = int_in("Number of integers to enter: ")
-
-    # Append new items to dynamically sized array, more Pythonic but less efficient
     arr = []
     for e in range(n):
         arr.append(int_in())
     return arr
-
-    # Initialize array with predetermined number of items (non-dynamic array, for non-Python languages)
-    # arr = [None] * n
-    # for e in range(n):
-        # arr[e] = int_in()

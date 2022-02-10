@@ -94,9 +94,15 @@ def t_array_check_type():
     print()
 
 
+def t_array_int_input():
+    a = array_int_input()
+    print(f'{len(a)} ints inputted.')
+    array_print(a)
+
+
 if __name__=='__main__':
     # t_array_str()
     # t_array_print()
-    t_array_random()
+    # t_array_random()
     # t_array_check_type()
-    # array_int_input() # take user input
+    t_array_int_input()

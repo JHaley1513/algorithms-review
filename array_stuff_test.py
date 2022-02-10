@@ -1,7 +1,60 @@
 from array_stuff import *
 
+class Thing:
+    def __str__(self):
+        return "Thing"
+    def __repr__(self):
+        return "Thing() object"
+
+
+def t_array_str():
+    a = [
+        [1, 4, -99, 240.0],
+        [' what\'s', '    ', ' up'],
+        [83429, 'ok ', -3900322340.0],
+        [False, True, False, Thing()],
+    ]
+    errors = 0
+    print('Testing array_str...')
+
+    for i in a:
+        s = array_str(i)
+        if type(s) != str:
+            print(f'array_str({i}) failed, returned {type(s)}')
+            errors += 1
+    print(f't_array_str: {errors} error(s).')
+    print()
+
+
+def t_array_print():
+    a = [
+        [1, 4, -99, 240.0],
+        [' what\'s', '    ', ' up   '],
+        [83429, 'ok ', -3900322340.0],
+        [False, True, False, Thing()],
+    ]
+    # Expected outputs
+    e = [
+        '1, 4, -99, 240.0',
+        ' what\'s,     ,  up   ',
+        '83429, ok , -3900322340.0',
+        'False, True, False, Thing'
+    ]
+    print('Testing array_print...')
+    if len(a) != len(e):
+        print(f'Arrays a and e have incompatible lengths: {len(a)} and {len(e)}.')
+        return
+    print('Expected vs result:')
+    for i in range(len(a)):
+        array_print(e[i], break_after=False)
+        array_print(a[i])
+    
+
+
+def t_array_random():
+    pass
+
 def t_array_check_type():
-    class Thing: pass
     a = [
         [1, 0, -9, 24],
         [4.50, 'yes', 6.5],
@@ -37,5 +90,8 @@ def t_array_check_type():
 
 
 if __name__=='__main__':
-    t_array_check_type()
+    # t_array_str()
+    t_array_print()
+    # t_array_random()
+    # t_array_check_type()
     # array_int_input() # take user input

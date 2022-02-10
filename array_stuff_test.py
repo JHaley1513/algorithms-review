@@ -46,7 +46,7 @@ def t_array_print():
         return
     print('Expected vs result:')
     for i in range(len(a)):
-        array_print(e[i], break_after=False)
+        print(e[i])
         array_print(a[i])
     
 

@@ -3,14 +3,22 @@ import random
 import string
 
 def array_check_type(arr, t):
-    if type(t) == list:
+    """Checks if arr's items are all type t, or all in t if t is a list of types."""
+    if t == list:
         for i in range(len(arr)):
             if type(arr[i]) not in t:
-                print(f'arr[{i}] = {arr[i]}. type is {type(arr[i])}, which is not in [{array_str(t)}].')
+                # print('array_check_type: ', end='')
+                # print(f'arr[{i}] {arr[i]}, type is {type(arr[i])}, which is not in [{array_str(t)}].')
+                print(f'Incorrect type: {arr[i]} is {type(arr[i])}.')
+                return False
     else:
         for i in range(len(arr)):
-            if arr[i] != t:
-                print(f'arr[{i}] = {arr[i]}. type is {type(arr[i])}, which is not {t}.')
+            if type(arr[i]) != t:
+                # print('array_check_type: ', end='')
+                # print(f'arr[{i}]: {arr[i]}, type is {type(arr[i])}, which is not {t}.')
+                print(f'Incorrect type: {arr[i]} is {type(arr[i])}.')
+                return False
+    return True
 
 def array_str(arr):
     for i in range(len(arr)):

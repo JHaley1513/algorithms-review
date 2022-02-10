@@ -4,30 +4,31 @@ import string
 
 def array_check_type(arr, t):
     """Checks if arr's items are all type t, or all in t if t is a list of types."""
-    if t == list:
+    if type(t) == list:
         for i in range(len(arr)):
             if type(arr[i]) not in t:
-                # print('array_check_type: ', end='')
-                # print(f'arr[{i}] {arr[i]}, type is {type(arr[i])}, which is not in [{array_str(t)}].')
-                print(f'Incorrect type: {arr[i]} is {type(arr[i])}.')
+                print(f'array_check_type: expected [{array_str(t)}], but {arr[i]} is {type(arr[i])}.')
                 return False
     else:
         for i in range(len(arr)):
             if type(arr[i]) != t:
-                # print('array_check_type: ', end='')
-                # print(f'arr[{i}]: {arr[i]}, type is {type(arr[i])}, which is not {t}.')
-                print(f'Incorrect type: {arr[i]} is {type(arr[i])}.')
+                print(f'array_check_type: expected {t}, but {arr[i]} is {type(arr[i])}.')
                 return False
     return True
+
 
 def array_str(arr):
     for i in range(len(arr)):
         arr[i] = str(arr[i])
     return ', '.join(arr)
-    # This way doesn't work for some reason
+    # This way doesn't work because you're modifying the variable i.
+    # At the beginning of the loop, i = the next item in arr.
+    # Essentially python copies the item in arr into i, rather than taking the item itself.
+    # So reassigning i just reassigns the variable i, without touching the original item in arr.
     # for i in arr:
     #     i = str(i)
     #     print(type(i))
+
 
 def array_print(arr):
     for i in range(len(arr)):
@@ -38,6 +39,7 @@ def array_print(arr):
             print()
     # Sample output:
     # 1, 4, 7, 29, 31
+
 
 def array_random(t='int', l=0):
     """Generate a random array of the selected type."""
@@ -55,6 +57,7 @@ def array_random(t='int', l=0):
             print(f'Unknown type for array_random: {t}')
             return []
     return arr
+
 
 def array_int_input():
     """Take a user-defined number of numeric inputs, return an array of ints."""

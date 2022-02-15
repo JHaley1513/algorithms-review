@@ -7,34 +7,58 @@ def merge1(arr, l, m, r):
     # Left position <= mid < right.
     # We assume arr[l:d] and arr[m + 1:r] are already sorted, then merge to create arr[l:r].
     # Num elements merged: r - l.
-    print(f'merge1({l}, {m}, {r})')
-
-    print('\t', end='')
-    arrs.array_print(arr)
-    i = k = l
+    # print(f'merge1({l}, {m}, {r})')
+    # arrs.array_print(arr)
+    # i = k = l
+    i = l
     j = m
+    # j = m + 1
+
     # We're going through arr[l:m] using i, and arr[m:r] using j.
     # We go from l to r using index k, with every arr[k] becoming min(arr[i], arr[j]).
-    while k < r and i < j:
-        print(f'i={i}, j={j}, k={k}, {arr[i]}, {arr[j]}')
-        # k becomes min(arr[i], arr[j])
-        if arr[i] < arr[j]:
-            arr[k], arr[i] = arr[i], arr[j]
+    # while k < r and i < j:
+    #     print(f'i={i}, j={j}, k={k}, {arr[i]}, {arr[j]}')
+    #     # k becomes min(arr[i], arr[j])
+    #     if arr[i] < arr[j]:
+    #         arr[k], arr[i] = arr[i], arr[j]
+    #         i += 1
+    #     else:
+    #         arr[k], arr[j] = arr[j], arr[i]
+    #         j += 1
+    #     k += 1
+    # print('\t', end='')
+    # arrs.array_print(arr)
+
+    # arr[i] is the smallest item in the range i...j not inclusive.
+    # arr[j] is the smallest item in the range j...r.
+    # On every iteration, after comparing the two, arr[i] should become the smallest remaining item.
+    # If i == j or j reaches r, we're done sorting (if any items remain, they just go at the end of the array in their current ordering).
+    # Else if arr[i] <= arr[j] and i < j, increment i.
+    # Else (if arr[i] > arr[j]), put arr[j] in arr[i]'s place and shift all items between i and j to the right.
+    while i < j and j < r:
+        # print('while')
+        if arr[i] <= arr[j]:
+            # arr[i] is already the smallest remaining item.
             i += 1
         else:
-            arr[k], arr[j] = arr[j], arr[i]
+            # Shift all items between i and j to the right, to make room for the new arr[i].
+            temp = arr[j]
+            for x in range(j, i, -1): 
+                arr[j] = arr[j-1]
+            arr[i] = temp
+            i += 1
             j += 1
-        k += 1
-    print('\t', end='')
-    arrs.array_print(arr)
+            
+
 
 
 def merge_sort1(arr, l, r):
     # The textbook starts from 1 and operates up to r inclusive, so 1...r.
     # We'll do it from 0 and exclusive, so 0...r.
-    print(f'merge_sort1({l}, {r})')
+    # print(f'merge_sort1({l}, {r})')
+    # print(f'merge_sort({arr[l]}, {arr[r - 1]})')
     if l >= r - 1: # i.e. if l = 0 and r = 1, we're only looking at arr[0], so return.
-        print('return')
+        # print('return')
         return
     m = (l + r) // 2
     merge_sort1(arr, l, m)
@@ -85,13 +109,13 @@ def merge_sort2(arr):
 
 
 if __name__=='__main__':
-    merge_type = 2
+    merge_type = 1
     a = arrs.array_random()
+
     if arrs.array_check_type(a, int):
         arrs.array_print(a)
-        
+
         if merge_type == 1:
-            arrs.array_print(a)
             merge_sort1(a, 0, len(a))
         elif merge_type == 2:
             merge_sort2(a)

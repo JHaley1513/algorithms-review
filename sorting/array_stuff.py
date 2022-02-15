@@ -5,9 +5,10 @@ import string
 
 def array_str(arr):
     """Returns an array as a comma-separated string with no brackets"""
+    new = []
     for i in range(len(arr)):
-        arr[i] = str(arr[i])
-    return ', '.join(arr)
+        new.append(str(arr[i]))
+    return ', '.join(new)
 
 
 def array_print(arr, break_after=True):

@@ -1,7 +1,7 @@
 # Merge sort 
 # Merge sort 1: pass full list each time, changing the left & right limits of what you operate on. (in-place sorting)
 # Merge sort 2: pass partial list each time (not in-place)
-from array_stuff import array_random, array_print, array_str
+import array_stuff as arrs
 
 def merge1(arr, l, m, r):
     # left position <= mid < right.
@@ -10,7 +10,7 @@ def merge1(arr, l, m, r):
     print(f'merge1({l}, {m}, {r})')
 
     print('\t', end='')
-    array_print(arr)
+    arrs.array_print(arr)
     i = k = l
     j = m
     # We're going through arr[l:m] using i, and arr[m:r] using j.
@@ -26,7 +26,7 @@ def merge1(arr, l, m, r):
             j += 1
         k += 1
     print('\t', end='')
-    array_print(arr)
+    arrs.array_print(arr)
 
 
 def merge_sort1(arr, l, r):
@@ -51,7 +51,7 @@ def merge2(arr, sub_arr1, sub_arr2):
         if type(sub_arr2[b]) != int:
             print(type(sub_arr2[a]))
     i = j = 0 # index in sub_arr1 and sub_arr2
-    print(f'merge2([{array_str(sub_arr1)}], [{array_str(sub_arr2)}])')
+    print(f'merge2([{arrs.array_str(sub_arr1)}], [{arrs.array_str(sub_arr2)}])')
     while i + j < len(arr):
         # if i + j > 0: # print a leading comma except on the first iteration
             # print(', ', end='')
@@ -69,11 +69,14 @@ def merge2(arr, sub_arr1, sub_arr2):
     #     print(f'{arr[i + j - 1]}', end='')
     # print()
     print("Combined array: ", end='')
-    array_print(arr)
+    arrs.array_print(arr)
 
 
 def merge_sort2(arr):
-    print(f'merge_sort2({array_str(arr)})')
+    print(f'merge_sort2({arrs.array_str(arr)})')
+    if not arrs.array_check_type(arr, int):
+        return
+
     n = len(arr)
     if n < 2:
         return
@@ -109,14 +112,18 @@ def merge_sort2(arr):
 
 if __name__=='__main__':
     merge_type = 2
+    
+    a = arrs.array_random()
+    print("initial array")
+    arrs.array_check_type(a, int)
+    print("inital array checked")
 
-    a = array_random()
     if merge_type == 1:
-        array_print(a)
+        arrs.array_print(a)
         merge_sort1(a, 0, len(a))
     elif merge_type == 2:
         merge_sort2(a)
     else:
-        print("Unknown merge type")
+        print(f'Unknown merge type: {merge_type}')
 
-    array_print(a)
+    arrs.array_print(a)

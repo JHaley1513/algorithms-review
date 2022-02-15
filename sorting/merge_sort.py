@@ -1,4 +1,4 @@
-# Merge sort 
+# Merge sort O(nlogn)
 # Merge sort 1: pass full list each time, changing the left & right limits of what you operate on. (in-place sorting)
 # Merge sort 2: pass partial list each time (not in-place)
 import array_stuff as arrs

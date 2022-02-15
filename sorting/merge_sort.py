@@ -4,9 +4,9 @@
 import array_stuff as arrs
 
 def merge1(arr, l, m, r):
-    # left position <= mid < right.
-    # we assume arr[l:d] and arr[m + 1:r] are already sorted, then merge to create arr[l:r].
-    # num elements merged: r - l.
+    # Left position <= mid < right.
+    # We assume arr[l:d] and arr[m + 1:r] are already sorted, then merge to create arr[l:r].
+    # Num elements merged: r - l.
     print(f'merge1({l}, {m}, {r})')
 
     print('\t', end='')
@@ -30,8 +30,8 @@ def merge1(arr, l, m, r):
 
 
 def merge_sort1(arr, l, r):
-    # the textbook starts from 1 and operates up to r inclusive, so 1...r.
-    # we'll do it from 0 and exclusive, so 0...r.
+    # The textbook starts from 1 and operates up to r inclusive, so 1...r.
+    # We'll do it from 0 and exclusive, so 0...r.
     print(f'merge_sort1({l}, {r})')
     if l >= r - 1: # i.e. if l = 0 and r = 1, we're only looking at arr[0], so return.
         print('return')
@@ -45,32 +45,16 @@ def merge_sort1(arr, l, r):
 def merge2(arr, sub_arr1, sub_arr2):
     """Merge two sorted subarrays into one combined sorted array."""
     i = j = 0 # index in sub_arr1 and sub_arr2
-    print(f'merge2([{arrs.array_str(sub_arr1)}], [{arrs.array_str(sub_arr2)}])')
     while i + j < len(arr):
-        # if i + j > 0: # print a leading comma except on the first iteration
-            # print(', ', end='')
         if j == len(sub_arr2) or (i < len(sub_arr1) and sub_arr1[i] < sub_arr2[j]):
-            if j == len(sub_arr2):
-                print(f'{j} == {len(sub_arr2)}')
-            else:
-                print(f'{i} < {len(sub_arr1)} and {sub_arr1[i]} < {sub_arr2[j]}')
             arr[i + j] = sub_arr1[i]
             i += 1
         else:
-            print("else")
             arr[i + j] = sub_arr2[j]
             j += 1
-    #     print(f'{arr[i + j - 1]}', end='')
-    # print()
-    print("Combined array: ", end='')
-    arrs.array_print(arr)
 
 
 def merge_sort2(arr):
-    print(f'merge_sort2({arrs.array_str(arr)})')
-    if not arrs.array_check_type(arr, int):
-        return
-
     n = len(arr)
     if n < 2:
         return
@@ -102,18 +86,16 @@ def merge_sort2(arr):
 
 if __name__=='__main__':
     merge_type = 2
-    
     a = arrs.array_random()
-    print("initial array")
-    arrs.array_check_type(a, int)
-    print("inital array checked")
-
-    if merge_type == 1:
+    if arrs.array_check_type(a, int):
         arrs.array_print(a)
-        merge_sort1(a, 0, len(a))
-    elif merge_type == 2:
-        merge_sort2(a)
-    else:
-        print(f'Unknown merge type: {merge_type}')
+        
+        if merge_type == 1:
+            arrs.array_print(a)
+            merge_sort1(a, 0, len(a))
+        elif merge_type == 2:
+            merge_sort2(a)
+        else:
+            print(f'Unknown merge type: {merge_type}')
 
-    arrs.array_print(a)
+        arrs.array_print(a)

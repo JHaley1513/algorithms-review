@@ -1,7 +1,8 @@
 # Merge sort O(nlogn)
 # Merge sort 1: pass full list each time, changing the left & right limits of what you operate on. (in-place sorting)
 # Merge sort 2: pass partial list each time (not in-place)
-import array_stuff as arrs
+# import algorithms-review.algo_utils as algu
+import algo_utils as algu
 
 def merge1(arr, l, m, r):
     # Left position <= mid < right.
@@ -85,10 +86,10 @@ def merge_sort2(arr):
 
 if __name__=='__main__':
     merge_type = 1
-    a = arrs.array_random()
+    a = algu.array_random()
 
-    if arrs.array_check_type(a, int):
-        arrs.array_print(a)
+    if algu.array_check_type(a, int):
+        algu.array_print(a)
 
         if merge_type == 1:
             merge_sort1(a, 0, len(a))
@@ -97,4 +98,4 @@ if __name__=='__main__':
         else:
             print(f'Unknown merge type: {merge_type}')
 
-        arrs.array_print(a)
+        algu.array_print(a)

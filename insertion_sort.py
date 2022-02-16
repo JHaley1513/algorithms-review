@@ -1,9 +1,9 @@
 # Insertion sort O(n^2)
-from array_stuff import array_int_input, array_random, array_print
+import algo_utils as algu
 import argparse
 
 def insertion_sort_simple():
-    arr = array_random()
+    arr = algu.array_random()
     for j in range(1, len(arr)):
         key = arr[j]
         i = j - 1
@@ -11,17 +11,17 @@ def insertion_sort_simple():
             arr[i + 1] = arr[i]
             i -= 1
         arr[i + 1] = key
-    array_print(arr)
+    algu.array_print(arr)
 
 
 def insertion_sort(descending=False, random=False):
     if random:
-        arr = array_random()
+        arr = algu.array_random()
     else:
-        arr = array_int_input()
+        arr = algu.array_int_input()
 
     print('Input: ', end='')
-    array_print(arr)
+    algu.array_print(arr)
 
     if descending:
         print('Sorting from greatest to least...')
@@ -42,7 +42,7 @@ def insertion_sort(descending=False, random=False):
         arr[i + 1] = key
 
     print('Output: ', end='')
-    array_print(arr)
+    algu.array_print(arr)
 
 
 if __name__=='__main__':

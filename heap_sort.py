@@ -16,23 +16,32 @@ def heap_print(a):
     # Determine how many digits each node contains (and whether the node is a negative number).
     #   For simplicity's sake, we're restricting nodes to the values -99 ≤ v ≤ 999.
 
+    tree = []
     # We first find the maximum power
     
     # Number of potential bottom-level nodes is the highest power of 2 that's ≤ the total number of nodes.
     # i.e. a tree with height 4 can have 8 to 15 total nodes, 
     # which is 7 non-bottom nodes plus 1 to 8 bottom level nodes, so max_bottom would be 8.
-    max_bottom = algu.tree_prev_power_2(a)
-
+    max_bottom = 2 ** (algu.prev_power_2(len(a)))
     # Then we find the max number of digits of all nodes in the row (- negative sign counts as a digit).
     # Then we allocate that many spaces plus one (for space between nodes) per node.
     
     # Iterate through bottom row.
     # There are always (max_bottom - 1) non-bottom nodes in a complete binary tree.
     # So, we start from the first bottom node and go to the end.
-    
+    bottom_nodes = a[max_bottom - 1:]
+    max_digits = algu.array_max_digits(bottom_nodes)
+    row = []
+    for i in range(len(bottom_nodes)):
+        row.append(str(bottom_nodes[i]))
+        if i < len(bottom_nodes) - 1:
+            # Add spaces between nodes, with extra spaces if the node isn't max_digits wide.
+            spaces = 1 + max_digits - algu.num_digits(bottom_nodes[i])
+            row.append(' ' * spaces)
+        
+    tree.append(''.join(row))
+    print(tree[0])
 
-    for i in range(0, 4000, 70):
-        print(f'')
 
 if __name__=='__main__':
-    pass
+    heap_print([16, 14, 10, 8, 7, 9, 3, 2, 4, 1])

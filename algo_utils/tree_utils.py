@@ -1,4 +1,4 @@
-def tree_prev_power_2(x):
+def prev_power_2(x):
     """Find n, the largest power of 2 such that 2^n ≤ x.
     Returns -1 meaning undefined for x < 1.
     """
@@ -15,7 +15,7 @@ def tree_prev_power_2(x):
     return n
 
 
-def tree_next_power_2(x):
+def next_power_2(x):
     """Find n, the smallest power of 2 such that 2^n ≥ x."""
     if type(x) != int:
         x = int(x)

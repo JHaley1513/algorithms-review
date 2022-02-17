@@ -93,9 +93,10 @@ def array_max_digits(arr):
 
     for i in range(len(arr)):
         remaining = arr[i]
-        t = type(remaining)
-        if t != int:
-            print(f'Invalid type for array_max_digits: {t}')
+        try:
+            remaining = int(remaining)
+        except:
+            print(f'array_max_digits: Error casting {remaining} to type int.')
             return 0
 
         digits = 0
@@ -109,3 +110,21 @@ def array_max_digits(arr):
             max_digits = digits
 
     return max_digits
+
+
+def num_digits(x):
+    """Find the number of digits in a single numbeer (including negative signs)."""
+    try:
+        x = int(x)
+    except:
+        print(f'array_max_digits: Error casting {x} to type int.')
+        return 0
+    remaining = x
+    digits = 0
+    if remaining < 0: # negative sign counts as a digit, then convert it to a positive to do the rest.
+        digits += 1
+        remaining = -remaining
+    while remaining > 0:
+        remaining //= 10
+        digits += 1
+    return digits

@@ -17,8 +17,22 @@ def heap_print(a):
     #   For simplicity's sake, we're restricting nodes to the values -99 ≤ v ≤ 999.
 
     # We first find the maximum power
-    pass
+    
+    # Number of potential bottom-level nodes is the highest power of 2 that's ≤ the total number of nodes.
+    # i.e. a tree with height 4 can have 8 to 15 total nodes, 
+    # which is 7 non-bottom nodes plus 1 to 8 bottom level nodes, so max_bottom would be 8.
+    max_bottom = algu.tree_prev_power_2(a)
 
+    # Then we find the max number of digits of all nodes in the row (- negative sign counts as a digit).
+    # Then we allocate that many spaces plus one (for space between nodes) per node.
+    
+    # Iterate through bottom row.
+    # There are always (max_bottom - 1) non-bottom nodes in a complete binary tree.
+    # So, we start from the first bottom node and go to the end.
+    
+
+    for i in range(0, 4000, 70):
+        print(f'')
 
 if __name__=='__main__':
     pass

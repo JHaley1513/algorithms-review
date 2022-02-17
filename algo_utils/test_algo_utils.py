@@ -1,4 +1,5 @@
-from array_stuff import *
+import array_utils
+import tree_utils
 
 class Thing:
     def __str__(self):
@@ -18,11 +19,11 @@ def t_array_str():
     print('Testing array_str...')
 
     for i in a:
-        s = array_str(i)
+        s = array_utils.array_str(i)
         if type(s) != str:
             print(f'array_str({i}) failed, returned {type(s)}')
             errors += 1
-    print(f't_array_str: {errors} error(s).')
+    print(f't_array_str finished with {errors} error(s).')
     print()
 
 
@@ -47,15 +48,15 @@ def t_array_print():
     print('Expected vs result:')
     for i in range(len(a)):
         print(e[i])
-        array_print(a[i])
+        array_utils.array_print(a[i])
     print()
     
 
 def t_array_random():
     print('Testing array_random...')
-    array_print(array_random(int, 10))
-    array_print(array_random(float, 8))
-    array_print(array_random(str, 5))
+    array_utils.array_print(array_utils.array_random(int, 10))
+    array_utils.array_print(array_utils.array_random(float, 8))
+    array_utils.array_print(array_utils.array_random(str, 5))
     print()
 
 
@@ -86,18 +87,35 @@ def t_array_check_type():
     
     for i in range(len(a)):
         # print(array_check_type(a[i], t[i])) # if False, will print `Incorrect Type: ...` then `False`.
-        if array_check_type(a[i], t[i]) != expected_output[i]:
+        if array_utils.array_check_type(a[i], t[i]) != expected_output[i]:
             print(f'Incorrect result for array_check_type({a[i]}, {t[i]}), should be {expected_output[i]}.')
             errors += 1
 
-    print(f'array_check_type: {errors} error(s).')
+    print(f't_array_check_type finished with {errors} error(s).')
     print()
 
 
 def t_array_int_input():
-    a = array_int_input()
+    a = array_utils.array_int_input()
     print(f'{len(a)} ints inputted.')
-    array_print(a)
+    array_utils.array_print(a)
+
+
+def t_array_max_digits():
+    a = [
+        [1, 10, 94, 0, 2],
+        [940, 1, 8, 104, -6, -65],
+        [-95, 40, 83, 12, 5]
+    ]
+    expected = [2, 3, 3]
+    errors = 0
+    for i in range(len(a)):
+        m = array_utils.array_max_digits(a[i])
+        e = expected[i]
+        if m != e:
+            print(f'Wrong max digits detected for a[{i}]: {m}, expected {e}')
+            errors += 1
+    print(f't_array_max_digits finished with {errors} error(s).')
 
 
 if __name__=='__main__':
@@ -105,4 +123,6 @@ if __name__=='__main__':
     # t_array_print()
     # t_array_random()
     # t_array_check_type()
-    t_array_int_input()
+    # t_array_int_input()
+    t_array_max_digits()
+    print('test_algo_utils complete.')

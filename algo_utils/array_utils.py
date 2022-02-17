@@ -85,3 +85,27 @@ def array_int_input():
     for e in range(n):
         arr.append(int_in())
     return arr
+
+
+def array_max_digits(arr):
+    """Find the number of digits in arr's largest number (including negative signs)."""
+    max_digits = 0
+
+    for i in range(len(arr)):
+        remaining = arr[i]
+        t = type(remaining)
+        if t != int:
+            print(f'Invalid type for array_max_digits: {t}')
+            return 0
+
+        digits = 0
+        if remaining < 0: # negative sign counts as a digit, then convert it to a positive to do the rest.
+            digits += 1
+            remaining = -remaining
+        while remaining > 0:
+            remaining //= 10
+            digits += 1
+        if digits > max_digits:
+            max_digits = digits
+
+    return max_digits

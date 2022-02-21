@@ -26,3 +26,20 @@ def next_power_2(x):
     while 2 ** n < x:
         n += 1
     return n
+
+
+def tree_left_child(tree, node):
+    """
+    @param tree: array of nodes making up a binary tree.
+    @param node: index of the node we're finding the left child of.
+    @return: index of the left child node.
+    """
+    return -1
+
+
+def tree_right_child(tree, node):
+    return -1
+
+
+def tree_parent(tree, node):
+    return -1

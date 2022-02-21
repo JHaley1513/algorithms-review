@@ -1,5 +1,30 @@
 import algo_utils as algu
 
+def heapify(tree, node):
+    """
+    @param tree: array of integers, which are binary tree nodes.
+    @param node: index of a node.
+        We take the sub-tree rooted at this node and turn it into a binary heap
+        (where every node's value ≤ its parent's value).
+    @return: no return value, this operation is done in-place on the tree array.
+    """
+    l = algu.tree_left_child(tree, node)
+    r = algu.tree_right_child(tree, node)
+    largest = -1
+
+    if l < len(tree) and tree[l] > tree[node]:
+        largest = l
+    else:
+        largest = node
+
+    if r < len(tree) and tree[r] > tree[largest]:
+        largest = r 
+
+    if largest != node:
+        tree[i], tree[largest] = tree[largest], tree[i] 
+        heapify(tree, largest)
+
+
 def heap_print(a):
     """Takes an array of binary heap nodes and prints them as a binary tree."""
     # Some definitions:
@@ -44,4 +69,4 @@ def heap_print(a):
 
 
 if __name__=='__main__':
-    heap_print([16, 14, 10, 8, 7, 9, 3, 2, 4, 1])
+    heap_print([360, 340, 300, 280, 270, 190, 130, 120, 40, 1])

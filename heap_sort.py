@@ -33,6 +33,15 @@ def heap_build(tree):
         heapify(tree, i)
 
 
+def heap_sort(arr):
+    heap_build(arr)
+    heap_size = 0
+    for i in range(len(arr) - 1, 0, -1):
+        arr[0], arr[i] = arr[i], arr[0]
+        heap_size -= 1
+        heapify(arr[:heap_size], 0)
+
+
 def heap_print(a):
     """Takes an array of binary heap nodes and prints them as a binary tree."""
     # Some definitions:
@@ -79,15 +88,20 @@ def heap_print(a):
 if __name__=='__main__':
     # heap_print([360, 340, 300, 280, 270, 190, 130, 120, 40, 1])
 
-    # Should return:
+    # Should print:
     #   [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
     t = [16, 4, 10, 14, 7, 9, 3, 2, 8, 1]
     heap_build(t)
     algu.array_print(t)
 
-    # Should return:
+    # Should print:
     #   [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
     t = [4, 1, 3, 2, 16, 9, 10, 14, 7, 8]
     heap_build(t)
     algu.array_print(t)
-    # returned [16, 14, 10, 7, 8, 9, 3, 2, 4, 1] which is also valid
+
+    # Should print:
+    #   [1, 2, 3, 4, 7, 8, 9, 10, 14, 16]
+    t = [16, 4, 10, 14, 7, 9, 3, 2, 8, 1]
+    heap_sort(t)
+    algu.array_print(t)

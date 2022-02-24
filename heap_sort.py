@@ -26,29 +26,24 @@ def heapify(tree, node):
     if largest != node:
         tree[node], tree[largest] = tree[largest], tree[node] 
         heapify(tree, largest)
-    algu.array_print(tree)
 
 
 def heap_build(tree):
-    for i in range((len(tree) // 2) - 1, -1, -1):
+    for i in range((len(tree) // 2) - 1, 1, -1):
         heapify(tree, i)
 
 
-def heap_sort(arr):
+def heap_sort(arr, x):
     heap_build(arr) 
     # heap_size = len(arr)
 
     # heapify places the largest item at arr[0].
     # On every iteration, we move this item to the back of the array, and run heapify once more on the remaining items.
-    # for i in range(len(arr) - 1, 0, -1):
-    #     arr[0], arr[i] = arr[i], arr[0]
-    #     # heap_size -= 1
-    #     # heapify(arr[:heap_size], 0)
-    #     heapify(arr[:i], 0)
-    algu.array_print(arr[:8])
-    heapify(arr[:8], 0)
-    algu.array_print(arr[:8])
-    algu.array_print(arr)
+    for i in range(len(arr) - 1, x, -1):
+        arr[0], arr[i] = arr[i], arr[0]
+        # heap_size -= 1
+        # heapify(arr[:heap_size], 0)
+        heapify(arr[:i], 0)
 
 
 def heap_print(a):
@@ -112,5 +107,19 @@ if __name__=='__main__':
     # Should print:
     #   [1, 2, 3, 4, 7, 8, 9, 10, 14, 16]
     t = [5, 4, 10, 14, 7, 9, 3, 2, 8, 1]
-    heap_sort(t)
-    algu.array_print(t)
+    print(f'Initial array:                {algu.array_str(t)}')
+    for i in range(9, 1, -1):
+        heap_sort(t, i)
+        print(f'heap sort on range(9, {i}, -1): ', end='')
+        algu.array_print(t)
+
+    # Currently VERY incorrect output:
+    # Initial array:                5, 4, 10, 14, 7, 9, 3, 2, 8, 1
+    # heap sort on range(9, 9, -1): 5, 4, 10, 14, 7, 9, 3, 2, 8, 1
+    # heap sort on range(9, 8, -1): 1, 4, 10, 14, 7, 9, 3, 2, 8, 5
+    # heap sort on range(9, 7, -1): 8, 4, 10, 14, 7, 9, 3, 2, 5, 1
+    # heap sort on range(9, 6, -1): 2, 4, 10, 14, 7, 9, 3, 5, 1, 8
+    # heap sort on range(9, 5, -1): 3, 4, 10, 14, 8, 9, 5, 1, 7, 2
+    # heap sort on range(9, 4, -1): 9, 4, 10, 14, 8, 5, 1, 7, 2, 3
+    # heap sort on range(9, 3, -1): 8, 4, 10, 14, 5, 1, 7, 2, 3, 9
+    # heap sort on range(9, 2, -1): 14, 4, 10, 9, 1, 7, 2, 3, 5, 8

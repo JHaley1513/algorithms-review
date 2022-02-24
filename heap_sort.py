@@ -9,25 +9,21 @@ def heapify(tree, node):
     @return: no return value, this operation is done in-place on the tree array.
     @runtime: O(logn) on n nodes, or O(h) for tree height h.
     """
-    # These return the index of each child if they exist, or -1 if they don't.
-    # print('heapify')
+    # These return the index of each child if it exists, or 0 if it doesn't.
+    #   (index 0 in a tree must be the top-level node and thus not a child, so 0 also denotes an invalid child).
     l = algu.tree_left_child(tree, node)
     r = algu.tree_right_child(tree, node)
-    largest = -1
+    largest = 0
 
-    if l > -1 and tree[l] > tree[node]: # if left child exists and it's greater than its parent node
-        # print('1')
+    if l and tree[l] > tree[node]: # if left child exists and it's greater than its parent node
         largest = l
     else:
-        # print('2')
         largest = node
 
-    if r > -1 and tree[r] > tree[largest]: # if right child exists and it's greater than max(parent, parent's left child)
-        # print('3')
+    if r and tree[r] > tree[largest]: # if right child exists and it's greater than max(parent, parent's left child)
         largest = r 
 
     if largest != node:
-        # print(f'swap parent {node}, {tree[node]} and child {largest}, {tree[largest]}. (index, value)')
         tree[node], tree[largest] = tree[largest], tree[node] 
         heapify(tree, largest)
 
@@ -86,6 +82,12 @@ if __name__=='__main__':
     # Should return:
     #   [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
     t = [16, 4, 10, 14, 7, 9, 3, 2, 8, 1]
-    algu.array_print(t)
     heap_build(t)
     algu.array_print(t)
+
+    # Should return:
+    #   [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
+    t = [4, 1, 3, 2, 16, 9, 10, 14, 7, 8]
+    heap_build(t)
+    algu.array_print(t)
+    # returned [16, 14, 10, 7, 8, 9, 3, 2, 4, 1] which is also valid

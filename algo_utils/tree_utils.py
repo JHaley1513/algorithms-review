@@ -36,18 +36,19 @@ def tree_left_child(tree, node):
     """
     @param tree: array of nodes making up a binary tree.
     @param node: index of the node we're finding the left child of.
-    @return: index of the left child node.
+    @return: index of the left child node, or 0 if it doesn't exist.
+        (index 0 in a tree must be the top-level node and thus not a child, so 0 also denotes an invalid child).
     """
     child = (2 * node) + 1
     if child >= len(tree):
-        print(f'tree_left_child: the node at index {node} has no children.')
-        return node
+        # print(f'tree_left_child: the node at index {node} has no children.')
+        return 0
     return child
 
 
 def tree_right_child(tree, node):
     child = (2 * node) + 2
     if child >= len(tree):
-        print(f'tree_right_child: the node at index {node} has no right child.')
-        return node
+        # print(f'tree_right_child: the node at index {node} has no right child.')
+        return 0
     return child

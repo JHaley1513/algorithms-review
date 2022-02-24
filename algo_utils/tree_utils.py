@@ -28,18 +28,26 @@ def next_power_2(x):
     return n
 
 
+def tree_parent(node):
+    return node // 2
+
+
 def tree_left_child(tree, node):
     """
     @param tree: array of nodes making up a binary tree.
     @param node: index of the node we're finding the left child of.
     @return: index of the left child node.
     """
-    return -1
+    child = (2 * node) + 1
+    if child >= len(tree):
+        print(f'tree_left_child: the node at index {node} has no children.')
+        return node
+    return child
 
 
 def tree_right_child(tree, node):
-    return -1
-
-
-def tree_parent(tree, node):
-    return -1
+    child = (2 * node) + 2
+    if child >= len(tree):
+        print(f'tree_right_child: the node at index {node} has no right child.')
+        return node
+    return child

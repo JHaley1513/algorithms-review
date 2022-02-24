@@ -7,22 +7,34 @@ def heapify(tree, node):
         We take the sub-tree rooted at this node and turn it into a binary heap
         (where every node's value ≤ its parent's value).
     @return: no return value, this operation is done in-place on the tree array.
+    @runtime: O(logn) on n nodes, or O(h) for tree height h.
     """
+    # These return the index of each child if they exist, or -1 if they don't.
+    # print('heapify')
     l = algu.tree_left_child(tree, node)
     r = algu.tree_right_child(tree, node)
     largest = -1
 
-    if l < len(tree) and tree[l] > tree[node]:
+    if l > -1 and tree[l] > tree[node]: # if left child exists and it's greater than its parent node
+        # print('1')
         largest = l
     else:
+        # print('2')
         largest = node
 
-    if r < len(tree) and tree[r] > tree[largest]:
+    if r > -1 and tree[r] > tree[largest]: # if right child exists and it's greater than max(parent, parent's left child)
+        # print('3')
         largest = r 
 
     if largest != node:
-        tree[i], tree[largest] = tree[largest], tree[i] 
+        # print(f'swap parent {node}, {tree[node]} and child {largest}, {tree[largest]}. (index, value)')
+        tree[node], tree[largest] = tree[largest], tree[node] 
         heapify(tree, largest)
+
+
+def heap_build(tree):
+    for i in range((len(tree) // 2) - 1, -1, -1):
+        heapify(tree, i)
 
 
 def heap_print(a):
@@ -69,4 +81,11 @@ def heap_print(a):
 
 
 if __name__=='__main__':
-    heap_print([360, 340, 300, 280, 270, 190, 130, 120, 40, 1])
+    # heap_print([360, 340, 300, 280, 270, 190, 130, 120, 40, 1])
+
+    # Should return:
+    #   [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
+    t = [16, 4, 10, 14, 7, 9, 3, 2, 8, 1]
+    algu.array_print(t)
+    heap_build(t)
+    algu.array_print(t)

@@ -26,6 +26,7 @@ def heapify(tree, node):
     if largest != node:
         tree[node], tree[largest] = tree[largest], tree[node] 
         heapify(tree, largest)
+    algu.array_print(tree)
 
 
 def heap_build(tree):
@@ -39,11 +40,15 @@ def heap_sort(arr):
 
     # heapify places the largest item at arr[0].
     # On every iteration, we move this item to the back of the array, and run heapify once more on the remaining items.
-    for i in range(len(arr) - 1, 0, -1):
-        arr[0], arr[i] = arr[i], arr[0]
-        # heap_size -= 1
-        # heapify(arr[:heap_size], 0)
-        heapify(arr[:i], 0)
+    # for i in range(len(arr) - 1, 0, -1):
+    #     arr[0], arr[i] = arr[i], arr[0]
+    #     # heap_size -= 1
+    #     # heapify(arr[:heap_size], 0)
+    #     heapify(arr[:i], 0)
+    algu.array_print(arr[:8])
+    heapify(arr[:8], 0)
+    algu.array_print(arr[:8])
+    algu.array_print(arr)
 
 
 def heap_print(a):
@@ -104,27 +109,8 @@ if __name__=='__main__':
     # heap_build(t)
     # algu.array_print(t)
 
-    # Verifying that heap_build works on each incomplete heap produced after each iteration of heapsort.
-    # Each heapsort iteration "removes" the largest item and then restructures the heap around the largest remaining item.
-    # The largest item (which is always at the heap's head, or index 0) that was just removed is marked by -1 here.
-    t = [
-        [-1, 14, 10, 8, 7, 9, 3, 2, 4, 1],
-        [-1, 8, 10, 4, 7, 9, 3, 2, 1],
-        [-1, 8, 9, 4, 7, 1, 3, 2],
-        [-1, 8, 3, 4, 7, 1, 2],
-        [-1, 7, 3, 4, 2, 1],
-        [-1, 4, 3, 1, 2],
-        [-1, 2, 3, 1],
-        [-1, 2, 1],
-        [-1, 1]
-    ]
-    for i in range(len(t)):
-        heap_build(t[i])
-        algu.array_print(t[i])
-
-
     # Should print:
     #   [1, 2, 3, 4, 7, 8, 9, 10, 14, 16]
-    # t = [16, 4, 10, 14, 7, 9, 3, 2, 8, 1]
-    # heap_sort(t)
-    # algu.array_print(t)
+    t = [5, 4, 10, 14, 7, 9, 3, 2, 8, 1]
+    heap_sort(t)
+    algu.array_print(t)

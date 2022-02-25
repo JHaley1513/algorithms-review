@@ -34,20 +34,16 @@ def heap_build(tree):
 
 
 def heap_sort(arr):
-    algu.array_print(arr)
     heap_build(arr)
-    algu.array_print(arr)
-    # heap_size = len(arr)
 
     # heapify places the largest item at arr[0].
     # On every iteration, we move this item to the back of the array, and run heapify once more on the remaining items.
     for i in range(len(arr) - 1, 0, -1):
-        print(arr[0])
         arr[0], arr[i] = arr[i], arr[0]
-        # print(arr[0])
-        # heap_size -= 1
-        # heapify(arr[:heap_size], 0)
-        heapify(arr[:i], 0)
+        temp = arr[:i]
+        heapify(temp, 0)
+        # heap_build(temp) # this works too
+        arr[:i] = temp[:i]
 
 
 def heap_print(a):
@@ -110,19 +106,10 @@ if __name__=='__main__':
 
     # Should print:
     #   [1, 2, 3, 4, 7, 8, 9, 10, 14, 16]
-    t = [5, 4, 10, 14, 7, 9, 3, 2, 8, 1]
+    t = [16, 4, 10, 14, 7, 9, 3, 2, 8, 1]
     heap_sort(t)
     algu.array_print(t)
 
-    # Currently VERY incorrect output:
-    # Initial array:                5, 4, 10, 14, 7, 9, 3, 2, 8, 1
-    # heap sort on range(9, 9, -1): 5, 4, 10, 14, 7, 9, 3, 2, 8, 1
-    # heap sort on range(9, 8, -1): 1, 4, 10, 14, 7, 9, 3, 2, 8, 5
-    # heap sort on range(9, 7, -1): 8, 4, 10, 14, 7, 9, 3, 2, 5, 1
-    # heap sort on range(9, 6, -1): 2, 4, 10, 14, 7, 9, 3, 5, 1, 8
-    # heap sort on range(9, 5, -1): 3, 4, 10, 14, 8, 9, 5, 1, 7, 2
-    # heap sort on range(9, 4, -1): 9, 4, 10, 14, 8, 5, 1, 7, 2, 3
-    # heap sort on range(9, 3, -1): 8, 4, 10, 14, 5, 1, 7, 2, 3, 9
-    # heap sort on range(9, 2, -1): 14, 4, 10, 9, 1, 7, 2, 3, 5, 8
-    # Literally every single one is just the first item (5) swapping with whatever item's at the end of the specified range, at least until the last one.
-    # It should actually be constructing a heap before sorting (so 5 shouldn't be the first item when starting out, ever), but that doesn't seem to be happening.
+    # t = [1, 14, 10, 8, 7, 9, 3, 2, 4]
+    # heap_build(t)
+    # print(t)

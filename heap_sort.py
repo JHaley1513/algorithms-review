@@ -46,6 +46,34 @@ def heap_sort(arr):
         arr[:i] = temp[:i]
 
 
+def heap_extract_max(arr):
+    if not arr:
+        print('heap_extract_max: input array is empty or null')
+        return None
+    heap_build(arr) # we're expecting a valid heap, but if it's not we'll convert it to one
+    
+    x = arr[0]
+    arr[0] = arr[len(arr) - 1]
+    heapify(arr, 0)
+    arr.pop() # remove the last item which we've already extracted
+    return x
+
+
+def heap_insert(arr, x):
+    i = len(arr) # after adding the new item, length of arr will increase by 1.
+    arr.append(None)
+    while i > 0 and arr[algu.tree_parent(i)] < x:
+        parent = algu.tree_parent(i)
+        arr[i] = arr[parent]
+        i = parent
+    arr[i] = x
+
+
+def heap_insert_simple(arr, x):
+    arr.append(x)
+    heap_build(arr)
+
+
 def heap_print(a):
     """Takes an array of binary heap nodes and prints them as a binary tree."""
     # Some definitions:
@@ -106,10 +134,17 @@ if __name__=='__main__':
 
     # Should print:
     #   [1, 2, 3, 4, 7, 8, 9, 10, 14, 16]
-    t = [16, 4, 10, 14, 7, 9, 3, 2, 8, 1]
-    heap_sort(t)
-    algu.array_print(t)
+    # t = [16, 4, 10, 14, 7, 9, 3, 2, 8, 1]
+    # heap_sort(t)
+    # algu.array_print(t)
 
     # t = [1, 14, 10, 8, 7, 9, 3, 2, 4]
     # heap_build(t)
     # print(t)
+
+    t = [1, 2, 3, 4, 7, 8, 9, 10, 14, 16]
+    algu.array_print(t)
+    print(heap_extract_max(t))
+    heap_insert(t, 11)
+    # heap_insert_simple(t, 11)
+    algu.array_print(t)

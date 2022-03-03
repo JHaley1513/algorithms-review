@@ -74,6 +74,67 @@ def heap_insert_simple(arr, x):
     heap_build(arr)
 
 
+class FifoPriorityQueue:
+    """StackPriorityQueue is the same idea, except self._next_key += 1 after enqueuing/pushing."""
+    class _Item:
+        def __init__(self, key, val):
+            self._key = key
+            self._val = val
+        def key(self):
+            return self._key
+        def val(self):
+            return self._val
+
+    def __init__(self):
+        self._data = []
+        self._items = 0
+        self._next_key = 0
+
+    def enqueue(self, x):
+        item = self._Item(self.next_key, x)
+        self._queue_insert(item)
+        self._length += 1
+        self._next_key -= 1
+
+    def _queue_insert(self, item):
+        """We're inserting item based on key value (newer items = lower keys / priority).
+        Based on heap_insert.
+        """
+        i = len(self._length)
+        self._data.append(None)
+        while i > 0 and self._data[algu.tree_parent(i)].key() < item.key():
+            parent = self._parent(i)
+            self._data[i] = self._data[parent]
+            i = parent
+        self._data[i] = item
+
+    def dequeue(self, x):
+        x = self._data[0].val()
+        self._data[0] = self._data[self.length - 1]
+        self._heapify(0)
+        self._data.pop() # remove the last item which we've already extracted
+        self._length -= 1
+        return x
+
+    def _heapify(self, node):
+        l = self._left_child(self._data, node)
+        r = self._right_child(self._data, node)
+        largest = 0
+
+        if l and self._data[l] > self._data[node]: # if left child exists and it's greater than its parent node
+            largest = l
+        else:
+            largest = node
+
+        if r and self._data[r] > self._data[largest]: # if right child exists and it's greater than max(parent, parent's left child)
+            largest = r 
+
+        if largest != node:
+            self._data[node], self._data[largest] = self._data[largest], self._data[node] 
+            heapify(self._data, largest)
+
+
+
 def heap_print(a):
     """Takes an array of binary heap nodes and prints them as a binary tree."""
     # Some definitions:

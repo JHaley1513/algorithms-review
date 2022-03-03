@@ -62,7 +62,7 @@ def heap_extract_max(arr):
 def heap_insert(arr, x):
     i = len(arr) # after adding the new item, length of arr will increase by 1.
     arr.append(None)
-    while i > 0 and arr[algu.tree_parent(i)] < x:
+    while i > 0 and x > arr[algu.tree_parent(i)]:
         parent = algu.tree_parent(i)
         arr[i] = arr[parent]
         i = parent
@@ -72,6 +72,16 @@ def heap_insert(arr, x):
 def heap_insert_simple(arr, x):
     arr.append(x)
     heap_build(arr)
+
+
+def heap_increase_key(arr, i, k):
+    """Set node at index i to max(arr[i], k). Based on heap_insert."""
+    if k > arr[i]:
+        arr[i] = k
+        while i > 0 and k > arr[algu.tree_parent(i)]:
+            parent = algu.tree_parent(i)
+            arr[i], arr[parent] = arr[parent], arr[i]
+            i = parent
 
 
 class FifoPriorityQueue:
@@ -203,9 +213,11 @@ if __name__=='__main__':
     # heap_build(t)
     # print(t)
 
-    t = [1, 2, 3, 4, 7, 8, 9, 10, 14, 16]
+    # t = [1, 2, 3, 4, 7, 8, 9, 10, 14, 16]
+    t = [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
     algu.array_print(t)
-    print(heap_extract_max(t))
-    heap_insert(t, 11)
+    # print(heap_extract_max(t))
+    # heap_insert(t, 11)
     # heap_insert_simple(t, 11)
+    heap_increase_key(t, 3, 18) # replace 8 with 18
     algu.array_print(t)

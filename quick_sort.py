@@ -53,8 +53,7 @@ def quick_sort(arr, p, r):
         q = partition(arr, p, r)
         print(f'q: {q}')
         quick_sort(arr, p, q)
-        # quick_sort(arr, p, q - 1)
-        quick_sort(arr, q, r)
+        quick_sort(arr, q + 1, r)
 
 
 if __name__=='__main__':

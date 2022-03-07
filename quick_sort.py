@@ -10,7 +10,6 @@
 # Then we sort arr1 and arr2 recursively until both sides (and therefore the whole array) have been sorted.
 import algo_utils as algu
 
-
 def partition(arr, p, r):
     """Operate on arr from p to r (exclusive, so from items p to r - 1)."""
     x = arr[p]
@@ -18,55 +17,43 @@ def partition(arr, p, r):
     j = r - 1
     while True:
         # Decrease j and increase i until arr[i] ≥ x ≥ arr[j].
-        # while arr[i] < x and i < r:
         while arr[i] < x:
             i += 1
-        # while arr[j] > x and j >= p:
         while arr[j] > x:
             j -= 1
+        # This is the crucial if-statement, without it we loop forever.
         if arr[i] == arr[j]:
             if i < r:
                 i += 1
-            elif j >= p:
-                j += 1
-            else:
-                return i # or j
+            # Interestingly, we don't need an `elif j > p` block.
+            # However, if we remove the `if i < r: i++` and replace it with `if j > p: j--`,
+            # the algorithm doesn't work.
         if i < j:
             arr[i], arr[j] = arr[j], arr[i]
-            # i += 1
-            # j -= 1
         else: # i has passed j. All items to the left of i > all items to the right of j, so we're done.
             return j
 
-# x = 3 (val not idx)
-# 3 3 2 1 4 (vals)
-# i = 0, j = 4 (idx's)
-# 1 3 2 3 4
-# i = 0, j = 3
-# 1 3 2 3 4
-# i = 1, j = 3
-
 
 def quick_sort(arr, p, r):
-    # print(f'[{algu.array_str(arr)}], p: {p}, r: {r}')
     if p < r:
         q = partition(arr, p, r)
-        # print(f'q: {q}')
         quick_sort(arr, p, q)
         quick_sort(arr, q + 1, r)
 
 
 if __name__=='__main__':
-    # a = [5, 3, 2, 6, 4, 1, 3, 7]
-    # algu.array_print(a)
-    # quick_sort(a, 0, len(a))
-    # algu.array_print(a)
+    trials = 7
+    errors = 0
 
-    for i in range(5):
+    for i in range(trials):
         a = algu.array_random()
-        print('Before sorting: ', end='')
-        algu.array_print(a)
+        print(f'Before sorting: {algu.array_str(a)}')
         quick_sort(a, 0, len(a))
-        print('After sorting: ', end='')
-        algu.array_print(a)
+        print(f'After sorting:  {algu.array_str(a)}')
+        s = algu.array_is_sorted(a)
+        if not s:
+            print("NOT sorted.")
+            errors += 1
         print()
+
+    print(f'Quicksort on {trials} arrays returned {errors} errors.')

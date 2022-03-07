@@ -128,3 +128,13 @@ def num_digits(x):
         remaining //= 10
         digits += 1
     return digits
+
+
+def array_is_sorted(arr):
+    if not arr:
+        print('array_is_sorted: input array is empty')
+        return True
+    for i in range(1, len(arr)):
+        if arr[i - 1] > arr[i]:
+            return False 
+    return True

@@ -33,8 +33,8 @@ def partition(arr, p, r):
                 return i # or j
         if i < j:
             arr[i], arr[j] = arr[j], arr[i]
-            i += 1
-            j -= 1
+            # i += 1
+            # j -= 1
         else: # i has passed j. All items to the left of i > all items to the right of j, so we're done.
             return j
 
@@ -48,16 +48,25 @@ def partition(arr, p, r):
 
 
 def quick_sort(arr, p, r):
-    print(f'[{algu.array_str(arr)}], p: {p}, r: {r}')
+    # print(f'[{algu.array_str(arr)}], p: {p}, r: {r}')
     if p < r:
         q = partition(arr, p, r)
-        print(f'q: {q}')
+        # print(f'q: {q}')
         quick_sort(arr, p, q)
         quick_sort(arr, q + 1, r)
 
 
 if __name__=='__main__':
-    a = [5, 3, 2, 6, 4, 1, 3, 7]
-    algu.array_print(a)
-    quick_sort(a, 0, len(a))
-    algu.array_print(a)
+    # a = [5, 3, 2, 6, 4, 1, 3, 7]
+    # algu.array_print(a)
+    # quick_sort(a, 0, len(a))
+    # algu.array_print(a)
+
+    for i in range(5):
+        a = algu.array_random()
+        print('Before sorting: ', end='')
+        algu.array_print(a)
+        quick_sort(a, 0, len(a))
+        print('After sorting: ', end='')
+        algu.array_print(a)
+        print()

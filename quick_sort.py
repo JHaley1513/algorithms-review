@@ -25,12 +25,14 @@ def partition(arr, p, r):
         if i < j:
             arr[i], arr[j] = arr[j], arr[i]
         else: # i has passed j. All items to the left of i > all items to the right of j, so we're done.
+            print('return j')
             return j
 
 
 def quick_sort(arr, p, r):
-    if p < r:
+    if p < r - 1:
         q = partition(arr, p, r)
+        print('passed partition')
         quick_sort(arr, p, q)
         quick_sort(arr, q, r)
 

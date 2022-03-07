@@ -18,22 +18,38 @@ def partition(arr, p, r):
     j = r - 1
     while True:
         # Decrease j and increase i until arr[i] ≥ x ≥ arr[j].
-        while arr[i] < x:
+        while arr[i] < x and i < r:
             i += 1
-        while arr[j] > x:
+        while arr[j] > x and j >= p:
             j -= 1
+        if arr[i] == arr[j]:
+            if i < r:
+                i += 1
+            elif j >= p:
+                j += 1
+            else:
+                return i # or j
         if i < j:
             arr[i], arr[j] = arr[j], arr[i]
         else: # i has passed j. All items to the left of i > all items to the right of j, so we're done.
-            print('return j')
             return j
+
+# x = 3 (val not idx)
+# 3 3 2 1 4 (vals)
+# i = 0, j = 4 (idx's)
+# 1 3 2 3 4
+# i = 0, j = 3
+# 1 3 2 3 4
+# i = 1, j = 3
 
 
 def quick_sort(arr, p, r):
+    print(f'[{algu.array_str(arr)}], p: {p}, r: {r}')
     if p < r - 1:
         q = partition(arr, p, r)
-        print('passed partition')
+        print(f'q: {q}')
         quick_sort(arr, p, q)
+        # quick_sort(arr, p, q - 1)
         quick_sort(arr, q, r)
 
 
